@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="">
+<Resource 
+	auth="container"
+	driverClassName="com.mysql.jdbc.Driver"
+	maxActive="100"
+	maxIdle="5"
+	maxWait="10000"
+	name="jdbc/mca"
+	type="javax.sql.DataSource"
+	url="jdbc:mysql://localhost:3306/OeNzRb2kBN?zeroDateTimeBehavior=convertToNull"
+	username="OeNzRb2kBN"
+	password="DhGrv3xz6g"/>
+	
+</Context>
