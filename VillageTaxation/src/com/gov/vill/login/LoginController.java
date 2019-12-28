@@ -29,13 +29,12 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("username", userId);
 			System.out.println(" Success login and redirect to home ");
 			HttpSession session = request.getSession(false);
-			if (session != null) {
+			if (null != session) {
 				session.invalidate();
 			}
 			session = request.getSession();
 			session.setAttribute("username", userId);
 			session.setMaxInactiveInterval(30 * 60); // 30 mins
-			//request.getRequestDispatcher("/admin/home").forward(request, response);
 			response.sendRedirect("admin/home");
 		} else {
 			System.out.println(" login failed so redirect to login page");
@@ -43,7 +42,8 @@ public class LoginController extends HttpServlet {
 			RequestDispatcher rDispatcher = request.getRequestDispatcher("/");
 			rDispatcher.forward(request, response);
 		}
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at:
+		// ").append(request.getContextPath());
 
 	}
 

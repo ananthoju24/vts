@@ -29,7 +29,7 @@
 							class="row justify-content-center align-items-center">
 							<div id="search-column" class="col-md-3">
 								
-									<form id="search-form" class="form" action="./searchrequest?action=search"
+									<form id="search-form" class="form" action="./vtscontroller?action=search"
 										method="post">
 										<h5 class="text-left text-info">Search Tax Details</h5>
 										<div class="form-group" >

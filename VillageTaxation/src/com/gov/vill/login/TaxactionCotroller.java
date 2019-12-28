@@ -2,7 +2,6 @@ package com.gov.vill.login;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,12 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.gov.vill.bean.TaxData;
 import com.gov.vill.bean.TaxDetails;
 import com.gov.vill.service.VillageTaxServiceImpl;
-import com.gov.vill.service.VillageTaxServie;
 
 /**
  * Servlet implementation class SearchCotroller
  */
-@WebServlet("/admin/searchrequest")
+@WebServlet("/admin/vtscontroller")
 public class TaxactionCotroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +49,7 @@ public class TaxactionCotroller extends HttpServlet {
 					request.getSession(false).setAttribute("errorMsg", "No data found. Please enter valid house no.");
 					request.getRequestDispatcher("/admin/home").forward(request, response);
 				}
-				
+
 			}
 		} else if ("add".equals(action)) {
 			String respDesc = null;
@@ -62,13 +60,15 @@ public class TaxactionCotroller extends HttpServlet {
 			taxDetails.setOwnerName(request.getParameter("ownerName"));
 			taxDetails.setTaxDataList(ll);
 			TaxData taxData = new TaxData();
-			taxData.setEp(request.getParameter("houseTax"));
-			taxData.setGp(request.getParameter("villageTax"));
-			taxData.setNp(request.getParameter("waterTax"));
-			taxData.setLp(request.getParameter("lightingTax"));
-			taxData.setPp(request.getParameter("cleanlinessTax"));
+
+			taxData.setEp(getIntVal(request.getParameter("houseTax")));
+			taxData.setGp(getIntVal(request.getParameter("villageTax")));
+			taxData.setNp(getIntVal(request.getParameter("waterTax")));
+			taxData.setLp(getIntVal(request.getParameter("lightingTax")));
+			taxData.setPp(getIntVal(request.getParameter("cleanlinessTax")));
 			taxData.setTaxYear(request.getParameter("taxYear"));
 			taxData.setPaymentStatus("Pending");
+			setTaxTotal(taxData);
 			ll.add(taxData);
 			System.out.println(" taxDataList :: " + taxDetails);
 			int respCode = service.addTaxData(taxDetails);
@@ -79,12 +79,16 @@ public class TaxactionCotroller extends HttpServlet {
 				respDesc = "Failed to add please try again";
 			}
 			System.out.println("respDesc " + respDesc);
-			response.getWriter().write(respDesc);
+			// response.getWriter().write(respDesc);
+			request.getSession(false).setAttribute("responseMsg", respDesc);
+			request.getRequestDispatcher("/admin/searchresult").forward(request, response);
 
-			// request.getRequestDispatcher("/admin/home").forward(request, response);
+			// request.getRequestDispatcher("/admin/home").forward(request,
+			// response);
 		}
 
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at:
+		// ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -92,4 +96,12 @@ public class TaxactionCotroller extends HttpServlet {
 		doGet(request, response);
 	}
 
+	int getIntVal(String s) {
+		return Integer.parseInt(s);
+	}
+
+	void setTaxTotal(TaxData taxData) {
+		int totalTax = taxData.getEp() + taxData.getGp() + taxData.getLp() + taxData.getNp() + taxData.getPp();
+		taxData.setTotalTaxAmount(totalTax);
+	}
 }

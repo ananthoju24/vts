@@ -11,13 +11,14 @@ import lombok.ToString;
 @ToString
 public class TaxData {
 
-	private String ep;
-	private String gp;
-	private String np;
-	private String lp;
-	private String pp;
+	private int ep;
+	private int gp;
+	private int np;
+	private int lp;
+	private int pp;
 	private String taxYear;
 	private String paymentStatus;
-	private String totalTaxAmount;
+	private int totalTaxAmount;
 
+	
 }

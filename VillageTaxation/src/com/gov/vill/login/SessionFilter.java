@@ -29,11 +29,23 @@ public class SessionFilter implements Filter {
 
 		HttpSession session = req.getSession(false);
 		request.setCharacterEncoding("UTF-8");
-		if (session == null) {
-			this.context.log("Invalid request");
-			resp.sendRedirect("../login");
+		if (null != session) {
+			/*try {
+				String userId = (String) session.getAttribute("username");
+				System.out.println("User id " + userId);
+				if (null != userId  || "".equals(userId)) {
+					this.context.log("Invalid request");
+					resp.sendRedirect("../login");
+				} else {*/
+					chain.doFilter(request, response);
+		/*		}
+			} catch (Exception e) {
+				System.out.println("Session Exception");
+				resp.sendRedirect("../login");
+			}*/
 		} else {
-			chain.doFilter(request, response);
+			System.out.println("Session is null");
+			resp.sendRedirect("../login");
 		}
 
 	}

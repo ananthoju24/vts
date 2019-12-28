@@ -9,7 +9,8 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, height=device-height, target-densitydpi=medium-dpi" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
@@ -37,7 +38,7 @@
 		$("#addTax").click(function() {
 			$.ajax({
 				type : "POST",
-				url : "./searchrequest?action=add",
+				url : "./vtscontroller?action=add",
 				data : $('form').serialize(),
 				success : function(data) {
 					//alert("Successfully added : " + data);
@@ -69,9 +70,10 @@
 </script>
 <style type="text/css">
 html, body {
-    max-width: 100%;
-    overflow-x: auto;
+	max-width: 100%;
+	overflow-x: auto;
 }
+
 @media print {
 	.no-print, .no-print * {
 		display: none !important;
@@ -123,12 +125,12 @@ html, body {
 								<div class="form-group col-sm-12">
 									<input type="submit" name="submit"
 										class="btn btn-primary col-sm-3" data-toggle="modal"
-										data-target="#exampleModalCenter" value="Paying Tax">
+										data-target="#exampleModalCenter" value="Pay Tax">
 								</div>
 								<div class="form-group 	col-sm-12">
 									<input type="submit" name="submit"
 										class="btn btn-primary col-sm-6" data-toggle="modal"
-										data-target="#addTaxModal" value="Add Tax Details">
+										data-target="#addTaxModal" value="Add Tax ">
 								</div>
 							</div>
 							<table class="table table-responsive">
@@ -184,14 +186,12 @@ html, body {
 					<p align="center">
 						<b>Grama Panchayati, Noothpally<br>Mandal Nandipet, Dist.
 							Nijamabad
-						</b>
-						<br>
-						 Tax Receipt
+						</b> <br> Tax Receipt
 					</p>
 					<table class="table table-responsive">
 						<tr>
 							<td>Receipt Number</td>
-							<td>: <%=System.currentTimeMillis() %></td>
+							<td>: <%=System.currentTimeMillis()%></td>
 							<td></td>
 							<td>Date</td>
 							<td>: <c:out value="${taxDetails.date}" /></td>
@@ -347,11 +347,14 @@ html, body {
 						<span aria-hidden="true">&times;</span>
 					</button>-->
 				</div>
-				<form id="addTaxForm">
+				<!-- <form id="addTaxForm"> -->
+				<form id="addTaxForm" class="form"
+					action="./vtscontroller?action=add" method="post">
 					<div class="modal-body">
 						<div class="form-group">
-							<input type="text" name="hno" value="${taxDetails.hno}" /> <input
-								type="text" name="owner" value="${taxDetails.ownerName}" />
+							<input type="text" name="hno" id="hno" value="${taxDetails.hno}"
+								hidden /> <input type="text" name="ownerName" id="ownerName"
+								value="${taxDetails.ownerName}" hidden />
 						</div>
 						<div class="form-group">
 							<label for="houseTax">House Tax</label> <input type="text"

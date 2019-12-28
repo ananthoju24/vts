@@ -15,8 +15,8 @@ public class TaxDaoImpl implements TaxDao {
 	private static Map<String, TaxDetails> taxDataMap = new HashMap<>();
 
 	static {
-		TaxData data = new TaxData("575", "46", "0", "58", "58", "2018", "Pending", "737");
-		TaxData dueData = new TaxData("575", "46", "0", "58", "58", "2017", "Pending", "737");
+		TaxData data = new TaxData(575, 46, 0, 58, 58, "2018", "Pending", 737);
+		TaxData dueData = new TaxData(575, 46, 0, 58, 58, "2017", "Pending", 737);
 		List<TaxData> taxList = new ArrayList<TaxData>();
 		taxList.add(data);
 		taxList.add(dueData);
@@ -46,10 +46,10 @@ public class TaxDaoImpl implements TaxDao {
 		int respCode = -1;
 		if (null != taxDetails && taxDataMap.containsKey(taxDetails.getHno())) {
 			TaxDetails datalist = taxDataMap.get(taxDetails.getHno());
-			System.out.println("Adding Data :: "+datalist);
+			System.out.println("Adding Data :: " + datalist);
 			List<TaxData> taxList = datalist.getTaxDataList();
 			taxList.add(taxDetails.getTaxDataList().get(0));
-			System.out.println("taxList  "+taxList);
+			System.out.println("taxList  " + taxList);
 			respCode = 0;
 		} else {
 			respCode = -2;
