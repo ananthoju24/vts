@@ -2,9 +2,8 @@ package com.vts.service;
 
 import org.springframework.stereotype.Component;
 
-import com.vts.beans.OwnerBean;
+import com.vts.beans.Owner;
 import com.vts.beans.TaxDetails;
-import com.vts.response.VTSRespone;
 
 @Component
 public interface VtsService {
@@ -13,6 +12,6 @@ public interface VtsService {
 
 	public TaxDetails geTaxDetails(String hno);
 	
-	public VTSRespone addOwner(OwnerBean owner);
+	public Owner create(Owner owner);
 	
 }

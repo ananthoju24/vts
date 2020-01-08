@@ -4,13 +4,8 @@
 <div role="main" class="container" style="margin-top: 85px;">
 	<h1 class="mt-5">Welcome to Village Taxation</h1>
 
-	<div class="form-group">
-		<a class="btn bg-info text-white btn-md col-sm-3" href="/taxDetails"
-			role="button">Tax Details</a>&nbsp;&nbsp; <a
-			class="btn bg-info text-white btn-md col-sm-3" href="/enroll"
-			role="button">Enroll</a>
-	</div>
-
+	<a class="btn btn-primary btn-lg col-md-3" href="/taxDetails" role="button">Tax
+		Details</a> <a class="btn btn-primary btn-lg col-md-3" href="/enroll" role="button">Enroll</a>
 
 	<p class="lead"></p>
 </div>

@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.vts.beans.OwnerBean;
+import com.vts.beans.Owner;
 import com.vts.beans.TaxData;
 import com.vts.beans.TaxDetails;
-import com.vts.response.VTSRespone;
 import com.vts.service.VtsService;
 
 @Controller
@@ -35,12 +33,12 @@ public class VTSController {
 	@Autowired
 	private VtsService vtsService;
 
-	@GetMapping({ "/", "login" })
+	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public String mainPage() {
 		return "login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginrequest", method = RequestMethod.POST)
 	public String processLogin(ModelMap model, @RequestParam String username, @RequestParam String password,
 			HttpServletRequest request) {
 		boolean isValidUser = vtsService.validateUser(username, password);
@@ -90,6 +88,12 @@ public class VTSController {
 
 	}
 
+	@PostMapping("/addtaxdetails")
+	public String addTaxDetails(ModelMap model, @ModelAttribute TaxDetails addTaxData) {
+		logger.info("addTaxData " + addTaxData);
+		return "searchresult";
+	}
+
 	@GetMapping("/logout")
 	public String logoutUser(HttpServletRequest httpServletRequest) {
 		logger.info("logoutUser :: processing logout ");
@@ -101,41 +105,29 @@ public class VTSController {
 		return "login";
 	}
 
-	@PostMapping("/addtaxdetails")
-	public String addTaxDetails(ModelMap model, @ModelAttribute TaxDetails addTaxData) {
-		logger.info("addTaxData " + addTaxData);
-		return "searchresult";
-	}
-
 	@GetMapping("/enroll")
-	public String enrollNewHouse(Model model) {
-		model.addAttribute("vtsResponse", null);
-		model.addAttribute("owner", new OwnerBean());
+	public String enrollNewHouse() {
 		return "enroll";
 	}
-
-	@PostMapping("/enroll")
-	public String enrollOwner(ModelMap model, @ModelAttribute OwnerBean owner) {
-		VTSRespone vtsResponse = null;
-		logger.info("enrollOwner :: request to add new owner details " + owner);
-		vtsResponse = vtsService.addOwner(owner);
-		model.addAttribute("owner", new OwnerBean());
-		model.put("vtsResponse", vtsResponse);
-		logger.info("enrollOwner :: vtsResponse " + vtsResponse);
-		// return "enroll";
-		return "enroll";
+	 
+	@PostMapping("/createEnroll")
+	public String createEnroll(Owner owner){
+		vtsService.create(owner);
+		return "Sucess";
+		
 	}
 
 	/*
-	 * @RequestMapping(value = "/loginFailed", method = RequestMethod.GET) public
-	 * String loginError(ModelMap model) { logger.info("Invalid credentials ");
-	 * model.put("errorMsg", "Invalid username/password"); return "login"; }
+	 * @RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
+	 * public String loginError(ModelMap model) {
+	 * logger.info("Invalid credentials "); model.put("errorMsg",
+	 * "Invalid username/password"); return "login"; }
 	 * 
 	 * if we use spring security == private String getName() { String userName =
 	 * null; Object principal =
 	 * SecurityContextHolder.getContext().getAuthentication().getPrincipal(); if
 	 * (principal instanceof UserDetails) { userName = ((UserDetails)
-	 * principal).getUsername(); } else { userName = principal.toString(); } return
-	 * userName; }
+	 * principal).getUsername(); } else { userName = principal.toString(); }
+	 * return userName; }
 	 */
 }
