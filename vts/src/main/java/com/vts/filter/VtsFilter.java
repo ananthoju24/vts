@@ -16,8 +16,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@Order(1)
+/*@Component
+@Order(1)*/
 public class VtsFilter implements Filter {
 
 	private static final Logger logger = LogManager.getLogger();
@@ -30,26 +30,26 @@ public class VtsFilter implements Filter {
 		HttpSession session = httpRequest.getSession(false);
 		String uri = httpRequest.getRequestURI();
 		logger.info("doFilter :: validating session : URI " + uri);
-		String userName = null;
-		try {
-			userName = (String) session.getAttribute("username");
-		} catch (Exception e) {
-			logger.error("doFilter :: username is not available in session ", e.getMessage());
-			userName = null;
-		}
 
-		/*
-		 * if ((uri.contains("h2-console"))) { chain.doFilter(request, response); }
-		 */
-		if ((null == session && (!(uri.contains("login"))))
-				|| (null != session && (null == userName || "".equals(userName)) && !(uri.contains("login")))) {
-			logger.error("doFilter :: redirecting to login page as session is null or invalid");
-			httpResponse.sendRedirect("/login");
-		} else {
-			logger.info("doFilter :: username in session " + userName + " sending request to controller ");
-			chain.doFilter(request, response);
-		}
+		if (!(uri.contains("h2-console"))) {
 
+			String userName = null;
+			try {
+				userName = (String) session.getAttribute("username");
+			} catch (Exception e) {
+				logger.error("doFilter :: username is not available in session ", e.getMessage());
+				userName = null;
+			}
+
+			if ((null == session && (!(uri.contains("login"))))
+					|| (null != session && (null == userName || "".equals(userName)) && !(uri.contains("login")))) {
+				logger.error("doFilter :: redirecting to login page as session is null or invalid");
+				httpResponse.sendRedirect("/login");
+			} else {
+				logger.info("doFilter :: username in session " + userName + " sending request to controller ");
+				chain.doFilter(request, response);
+			}
+		}
 	}
 
 }

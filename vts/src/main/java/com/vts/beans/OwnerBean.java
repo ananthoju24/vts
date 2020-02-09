@@ -9,7 +9,8 @@ public class OwnerBean implements Serializable {
 
 	private static final long serialVersionUID = 7745292733137984739L;
 	private String ownerName;
-	private String houseNumber;
+	private String FatherOrHusband;
 	private String mobileNumber;
+	private String houseNumber;
 
 }

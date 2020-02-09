@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.vts.entity.HouseInfo;
 
-public interface HouseRepository extends JpaRepository<HouseInfo, Long> {
+public interface HouseRepository extends JpaRepository<HouseInfo, String> {
 
 }

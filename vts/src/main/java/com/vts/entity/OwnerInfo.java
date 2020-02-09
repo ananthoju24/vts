@@ -17,15 +17,18 @@ public class OwnerInfo extends BaseEntity {
 
 	private static final long serialVersionUID = -7529422181008477720L;
 
-	@SequenceGenerator(name = "ownerid_seq", initialValue = 1000)
+	@SequenceGenerator(name = "ownerId", initialValue = 1000)
 	@Column(name = "F_OWNER_ID", nullable = false)
 	@Id
-	@GeneratedValue(generator = "ownerid_seq", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "ownerId", strategy = GenerationType.SEQUENCE)
 	private Long ownerID;
 
 	@Column(name = "F_OWNER_NAME", nullable = false, unique = true)
 	private String ownerName;
 
+	@Column(name = "F_FATHER_OR_HUSBAND_NAME", nullable = false, unique = true)
+	private String FatherOrHusband;
+	
 	@Column(name = "F_MOBILE_NUMBER", nullable = false)
 	private String mobileNumber;
 

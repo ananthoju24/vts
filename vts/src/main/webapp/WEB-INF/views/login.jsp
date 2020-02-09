@@ -1,15 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" %>
+<%@ page pageEncoding="UTF-8" %>--%>
+ <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<!-- <meta charset="utf-8"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="apple-touch-icon" sizes="180x180"
+	href="/resources/assets/favicon_vts/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/resources/assets/favicon_vts/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="/resources/assets/favicon_vts/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<style>
+@media screen and (min-width: 768px) {
+	.modal-dialog {
+		width: 700px; /* New width for default modal */
+	}
+	.modal-sm {
+		width: 350px; /* New width for small modal */
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.modal-lg {
+		width: 950px; /* New width for large modal */
+	}
+}
+</style>
 <title>VillageTaxation</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-
 <script>
 	function noBack() {
 		window.history.forward(1);
@@ -24,13 +48,13 @@
 		void (0);
 	}
 </script>
-
 <!------ Include the above in your HEAD tag ---------->
 </head>
 <body onload="noBack()">
 	<!-- Default form login -->
 	<div role="main" class="container">
 		<div id="login">
+
 			<h3 class="text-center .text-muted pt-5">Village Taxation</h3>
 			<div class="container">
 				<div id="login-row"
@@ -56,7 +80,7 @@
 								</div>
 								<div class="form-group">
 									<!-- <label for="remember-me" class="text-info"><span>Remember
-										me</span>  <span><input id="remember-me" name="remember-me"
+										me</span>Â  <span><input id="remember-me" name="remember-me"
 										type="checkbox"></span></label><br>  -->
 									<input type="submit" name="submit" class="btn btn-info btn-md"
 										value="submit">
